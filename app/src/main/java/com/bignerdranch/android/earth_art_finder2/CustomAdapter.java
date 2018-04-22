@@ -42,7 +42,7 @@ public class CustomAdapter extends ArrayAdapter<DataItem> {
         if (convertView==null)  {
             LayoutInflater inflater = ((Activity)context).getLayoutInflater();
 
-            convertView = inflater.inflate(layoutResourceId, null);
+            convertView = inflater.inflate(layoutResourceId, null); //**********why null here instead of parent*************
 
             holder = new DataHolder();
             holder.ivArt = (ImageView)convertView.findViewById(R.id.ivArtPiece);
