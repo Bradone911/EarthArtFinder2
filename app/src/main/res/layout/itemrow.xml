@@ -22,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/itemmargin"
-        android:text="TextView"
+        android:text="@string/text_view"
         tools:layout_editor_absoluteX="163dp"
         tools:layout_editor_absoluteY="39dp"
         tools:ignore="MissingConstraints" />
