@@ -21,15 +21,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        lstData = new ArrayList<>();
-
-        lstData.add(new DataItem(R.drawable.spiraljetty, "Spiral Jetty"));
-        lstData.add(new DataItem(R.drawable.amarilloramp, "Amarillo Ramp"));
-        lstData.add(new DataItem(R.drawable.lightingfield, "Lighting Field"));
-        lstData.add(new DataItem(R.drawable.suntunnels, "Sun Tunnels"));
-        lstData.add(new DataItem(R.drawable.doublenegative, "Double Negative"));
-        lstData.add(new DataItem(R.drawable.brokencircle, "Broken Circle"));
-        lstData.add(new DataItem(R.drawable.city, "City"));
+        lstData = DataHandler.getDataItems();
 
         ListView listView = (ListView)findViewById(R.id.ListView);
 
