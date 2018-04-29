@@ -19,7 +19,8 @@
         </activity>
 
         <activity
-            android:name=".Main2Activity">
+            android:name=".Main2Activity"
+            android:parentActivityName=".MainActivity">
 
         </activity>
     </application>

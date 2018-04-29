@@ -15,6 +15,7 @@ import java.util.ArrayList;
 public class Main2Activity extends AppCompatActivity {
 
     ImageView mImageView;
+    private Button button2;
 
 
     @Override
@@ -22,12 +23,12 @@ public class Main2Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
-        ImageView imageView = (ImageView)findViewById(R.id.imageView);
-        TextView textView = (TextView)findViewById(R.id.textView);
-        Button nxtButton = (Button)findViewById(R.id.nxtbutton);
+        ImageView imageView = (ImageView) findViewById(R.id.imageView);
+        TextView textView = (TextView) findViewById(R.id.textView);
+        Button nxtButton = (Button) findViewById(R.id.nxtbutton);
 
         textView.setText(getIntent().getStringExtra("Art Piece"));
-        imageView.setImageResource(getIntent().getIntExtra("Art",R.drawable.spiraljetty));
+        imageView.setImageResource(getIntent().getIntExtra("Art", R.drawable.spiraljetty));
 
         int position = getIntent().getIntExtra("Current Position", 0);
         position++;
@@ -49,7 +50,7 @@ public class Main2Activity extends AppCompatActivity {
         });
 
         Button btnCamera = (Button) findViewById(R.id.btnCamera);
-        ImageView mImageView= (ImageView) findViewById(R.id.imageView);
+        ImageView mImageView = (ImageView) findViewById(R.id.imageView2);
 
         btnCamera.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,11 +59,29 @@ public class Main2Activity extends AppCompatActivity {
                 startActivityForResult(intent, 0);
             }
         });
+
+        //back button up top in app bar
+        getSupportActionBar().setTitle("Activity 2");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        button2 = (Button) findViewById(R.id.prevbutton);
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openActivity2();
+            }
+
+            public void openActivity2() {
+                Intent intent = new Intent();
+                startActivity(intent);
+            }
+        });
+
     }
 
     @Override
-    protected void onActivityResult(int reqeustCode, int resultCode, Intent data)   {
-        super.onActivityResult(reqeustCode, resultCode, data);
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)   {
+        super.onActivityResult(requestCode, resultCode, data);
         Bitmap bitmap = (Bitmap)data.getExtras().get("data");
         mImageView.setImageBitmap(bitmap);
     }
