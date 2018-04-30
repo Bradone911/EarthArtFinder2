@@ -1,22 +1,26 @@
 package com.bignerdranch.android.earth_art_finder2;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.io.File;
 import java.util.ArrayList;
 
 public class Main2Activity extends AppCompatActivity {
 
-    ImageView mImageView;
-    private Button button2;
-
+    private static final int cameraRequest = 7785;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,11 +29,49 @@ public class Main2Activity extends AppCompatActivity {
 
         ImageView imageView = (ImageView) findViewById(R.id.imageView);
         TextView textView = (TextView) findViewById(R.id.textView);
-        Button nxtButton = (Button) findViewById(R.id.nxtbutton);
 
         textView.setText(getIntent().getStringExtra("Art Piece"));
         imageView.setImageResource(getIntent().getIntExtra("Art", R.drawable.spiraljetty));
 
+        ImageView mImageView = (ImageView) findViewById(R.id.imageView2);
+
+        createPrevButton();
+        createNextButton();
+        createCameraButton();
+
+        //back button up top in app bar
+        getSupportActionBar().setTitle("Activity 2");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+
+    }
+
+
+    private void createPrevButton() {
+        Button prevButton = (Button) findViewById(R.id.prevbutton);
+        int position = getIntent().getIntExtra("Current Position", 0);
+        position--;
+        position = position < 0 ? MainActivity.lstData.size() + position : position;
+        final int prevPosition = position;
+
+        prevButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.putExtra("Art Piece", MainActivity.lstData.get(prevPosition).ArtName);
+                intent.putExtra("Art", MainActivity.lstData.get(prevPosition).resIdThumbnail);
+                intent.putExtra("Current Position", prevPosition);
+
+                intent.setClass(Main2Activity.this, Main2Activity.class);/////*****Main2Activity was MainActivity
+                startActivity(intent);
+            }
+
+        });
+    }
+
+    private void createNextButton() {
+        Button nxtButton = (Button) findViewById(R.id.nxtbutton);
         int position = getIntent().getIntExtra("Current Position", 0);
         position++;
         position %= MainActivity.lstData.size();
@@ -48,42 +90,32 @@ public class Main2Activity extends AppCompatActivity {
             }
 
         });
+    }
 
+    private void createCameraButton(){
         Button btnCamera = (Button) findViewById(R.id.btnCamera);
-        ImageView mImageView = (ImageView) findViewById(R.id.imageView2);
-
         btnCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(intent, 0);
+                startActivityForResult(intent, cameraRequest);
             }
         });
-
-        //back button up top in app bar
-        getSupportActionBar().setTitle("Activity 2");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        button2 = (Button) findViewById(R.id.prevbutton);
-        button2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openActivity2();
-            }
-
-            public void openActivity2() {
-                Intent intent = new Intent();
-                startActivity(intent);
-            }
-        });
-
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)   {
-        super.onActivityResult(requestCode, resultCode, data);
-        Bitmap bitmap = (Bitmap)data.getExtras().get("data");
-        mImageView.setImageBitmap(bitmap);
+        Log.i("request code", Integer.toString(requestCode));
+        Log.i("result code", Integer.toString(resultCode));
+        Uri u;
+        if(requestCode == cameraRequest){
+            if(resultCode == RESULT_OK){
+                Bundle extras = data.getExtras();
+                Bitmap bitmap = (Bitmap)extras.get("data");
+                ImageView imageView = (ImageView) findViewById(R.id.imageView);
+                imageView.setImageBitmap(bitmap);
+            }
+        }
     }
 }
 
