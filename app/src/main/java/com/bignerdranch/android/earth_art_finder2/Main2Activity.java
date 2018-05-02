@@ -1,5 +1,6 @@
 package com.bignerdranch.android.earth_art_finder2;
 
+import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -14,12 +15,18 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 
 import java.io.File;
 import java.util.ArrayList;
 
 public class Main2Activity extends AppCompatActivity {
 
+    private static final String TAG = "MainActivity";
+    private static final int ERROR_DIALOG_REQUEST = 9001;
     private static final int cameraRequest = 7785;
 
     @Override
@@ -38,6 +45,7 @@ public class Main2Activity extends AppCompatActivity {
         createPrevButton();
         createNextButton();
         createCameraButton();
+        createMapButton();
 
         //back button up top in app bar
         getSupportActionBar().setTitle("Activity 2");
@@ -103,6 +111,19 @@ public class Main2Activity extends AppCompatActivity {
         });
     }
 
+    private void createMapButton(){
+        if (isServicesOK()) {
+            Button btnMap = (Button) findViewById(R.id.mapbutton);
+            btnMap.setOnClickListener(new View.OnClickListener()    {
+                @Override
+                public void onClick(View view)  {
+                    Intent intent = new Intent(Main2Activity.this, MapActivity.class);
+                    startActivity(intent);
+                }
+            });
+        }
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)   {
         Log.i("request code", Integer.toString(requestCode));
@@ -116,6 +137,26 @@ public class Main2Activity extends AppCompatActivity {
                 imageView.setImageBitmap(bitmap);
             }
         }
+    }
+    public boolean isServicesOK()   {
+        Log.d(TAG, "isServicesOK: checking google services version");
+
+        int available = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(Main2Activity.this);
+
+        if (available == ConnectionResult.SUCCESS)  {
+            //everything is fine and the user can make map request
+            Log.d(TAG, "isServiceOK: Google Play Services is working");
+            return true;
+        }
+        else if (GoogleApiAvailability.getInstance().isUserResolvableError(available))  {
+            //an error occured but we can resolve it
+            Log.d(TAG, "isServicesOK: an error occured but we can fit it");
+            Dialog dialog = GoogleApiAvailability.getInstance().getErrorDialog(Main2Activity.this, available, ERROR_DIALOG_REQUEST);
+            dialog.show();
+        }else {
+            Toast.makeText(this, "You can't make map requests", Toast.LENGTH_SHORT).show();
+        }
+        return false;
     }
 }
 
