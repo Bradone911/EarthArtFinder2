@@ -3,7 +3,11 @@
     package="com.bignerdranch.android.earth_art_finder2">
 
     <!--<uses-permission-sdk-23 android:name="android.permission.CAMERA" />-->
-    <uses-permission-sdk-23 android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
         android:allowBackup="true"
@@ -13,6 +17,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBasGyb0NgrSF6qmd7kvKv9jcIm3bPreFs"/>
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,6 +35,13 @@
         <activity
             android:name=".Main2Activity"
             android:parentActivityName=".MainActivity">
+
+        </activity>
+
+
+        <activity
+            android:name=".MapActivity"
+            android:parentActivityName=".Main2Activity">
 
         </activity>
     </application>
