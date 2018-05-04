@@ -48,7 +48,7 @@ public class Main2Activity extends AppCompatActivity {
         createMapButton();
 
         //back button up top in app bar
-        getSupportActionBar().setTitle("Activity 2");
+        getSupportActionBar().setTitle("Land Art Description");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 

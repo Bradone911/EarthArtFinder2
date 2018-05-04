@@ -1,6 +1,7 @@
 package com.bignerdranch.android.earth_art_finder2;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;

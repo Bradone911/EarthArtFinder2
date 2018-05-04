@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Main2Activity">
+    tools:context=".Main2Activity"
+    android:background="#FFC107">
 
     <TextView
         android:id="@+id/textView"
@@ -34,6 +35,9 @@
 
     <Button
         android:id="@+id/nxtbutton"
+        android:background="#000000"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -46,6 +50,9 @@
 
     <Button
         android:id="@+id/mapbutton"
+        android:background="#000000"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -55,6 +62,9 @@
 
     <Button
         android:id="@+id/prevbutton"
+        android:textColor="#FFFFFF"
+        android:background="#000000"
+        android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -83,6 +93,7 @@
 
         <Button
             android:id="@+id/btnCamera"
+            android:textStyle="bold"
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

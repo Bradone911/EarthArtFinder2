@@ -71,7 +71,7 @@ public class DBHandler extends SQLiteOpenHelper {
      * All CRUD(Create, Read, Update, Delete) Operations
      */
 
-    // Adding new Student Information
+    // Adding new Item Information
     void addNewItem(DataItem item) {
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -88,25 +88,6 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
 
-//    public boolean updateItemInfo(int updId, int updEnrolNo, String updName, String updPhoneNo) {
-//
-//        SQLiteDatabase db = this.getWritableDatabase();
-//
-//        ContentValues args = new ContentValues();
-//
-//        args.put(KEY_NAME, updName);
-//
-//        return db.update(TABLE_ITEM_DETAIL, args, KEY_ID + "=" + updId, null) > 0;
-//    }
-
-
-//    public boolean deleteItem(int delID){
-//
-//        SQLiteDatabase db = this.getWritableDatabase();
-//
-//        return db.delete(TABLE_ITEM_DETAIL, KEY_ID + "=" + delID, null) > 0;
-//
-//    }
 
 
 
