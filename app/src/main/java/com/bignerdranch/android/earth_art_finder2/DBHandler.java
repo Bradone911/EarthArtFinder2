@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +17,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
     // All Static variables
     // Database Version
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     // Database Name
     private static final String DATABASE_NAME = "earthArt";
@@ -35,21 +36,25 @@ public class DBHandler extends SQLiteOpenHelper {
     //creating Tables
     @Override
     public void onCreate(SQLiteDatabase db) {
-
+        String TAG = "DB CREATE";
+        Log.i(TAG, "creating");
         String CREATE_ITEM_DETAIL_TABLE = "CREATE TABLE " + TABLE_ITEM_DETAIL + "("
                 + KEY_ID + " INTEGER PRIMARY KEY,"
                 + KEY_NAME + " TEXT)";
 
+        Log.i(TAG, CREATE_ITEM_DETAIL_TABLE);
         db.execSQL(CREATE_ITEM_DETAIL_TABLE);
 
         String INSERT_ITEMS = "INSERT INTO " + TABLE_ITEM_DETAIL + "(" + KEY_ID + "," + KEY_NAME + ") " +
-                "(" + R.drawable.spiraljetty +  ",Spiral Jetty), " + "(" +
-        R.drawable.amarilloramp + "Amarillo Ramp), " + "(" +
-        R.drawable.lightingfield + "Lighting Field), " + "(" +
-        R.drawable.suntunnels + "Sun Tunnels), " + "(" +
-        R.drawable.doublenegative + "Double Negative), " + "(" +
-        R.drawable.brokencircle + "Broken Circle) " + "(" +
-        R.drawable.city + "City)";
+                "VALUES(" + R.drawable.spiraljetty +  ",'Spiral Jetty'), "
+                + "(" + R.drawable.amarilloramp + ",'Amarillo Ramp'), "
+                + "(" +R.drawable.lightingfield + ",'Lighting Field'), "
+                + "(" +R.drawable.suntunnels + ",'Sun Tunnels'), "
+                + "(" +R.drawable.doublenegative + ",'Double Negative'), "
+                + "(" +R.drawable.brokencircle + ",'Broken Circle'), "
+                + "(" +R.drawable.city + ",'City')";
+        db.execSQL(INSERT_ITEMS);
+
     }
 
     @Override
