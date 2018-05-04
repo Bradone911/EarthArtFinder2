@@ -10,9 +10,6 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by 3537 on 06-11-2015.
- */
 public class DBHandler extends SQLiteOpenHelper {
 
     // All Static variables
@@ -67,9 +64,7 @@ public class DBHandler extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    /**
-     * All CRUD(Create, Read, Update, Delete) Operations
-     */
+
 
     // Adding new Item Information
     void addNewItem(DataItem item) {
