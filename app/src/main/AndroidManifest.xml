@@ -35,14 +35,12 @@
         <activity
             android:name=".Main2Activity"
             android:parentActivityName=".MainActivity">
-
         </activity>
 
 
         <activity
             android:name=".MapActivity"
             android:parentActivityName=".Main2Activity">
-
         </activity>
     </application>
 

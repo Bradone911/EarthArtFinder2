@@ -14,14 +14,15 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     public static ArrayList<DataItem> lstData;
-
+    public static DBHandler db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        db = new DBHandler(this);
 
-        lstData = DataHandler.getDataItems();
+        lstData = db.getAllItemsList();
 
         ListView listView = (ListView)findViewById(R.id.ListView);
 

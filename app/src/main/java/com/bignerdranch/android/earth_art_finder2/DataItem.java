@@ -9,4 +9,16 @@ public class DataItem {
         this.resIdThumbnail = resIdThumbnail;
         this.ArtName = ArtName;
     }
+
+    public DataItem(){
+        this(-1, "This shouldn't exist ever");
+    }
+
+    public void setResIdThumbnail(int resIdThumbnail) {
+        this.resIdThumbnail = resIdThumbnail;
+    }
+
+    public void setArtName(String artName){
+        this.ArtName = artName;
+    }
 }
